@@ -1,3 +1,3 @@
 Waste Segregation
 
-A CNN Model that segregates wastes in 6 different categories, with a user friendly interface.
+A CNN Model that segregates wastes in 6 different categories with a user friendly interface.
