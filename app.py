@@ -1,27 +1,44 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 
 from time import time
 import os
 import cv2
 import tensorflow as tf
 import numpy as np
-from keras.preprocessing import image
+import keras.utils as image
 import json
 from PIL import Image
+from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='template')
+
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/predict')
+@app.route('/predict', methods=['POST'])
 
-def predict(img_path):
-     
+def predict():
      labels={0: 'Cardboard', 1: 'Glass', 2: 'Metal', 3: 'Paper', 4: 'Plastic', 5: 'Trash'}
-     img_path = '../platic3.jpg'
-     img = image.load_img(img_path, target_size=(32,32))
+
+     if 'image' not in request.files:
+        return jsonify({'error': 'No file part'})
+
+     file = request.files['image']
+
+     if file.filename == '':
+        return jsonify({'error': 'No selected file'})
+
+    # Save the uploaded image
+     filename = secure_filename(file.filename)
+     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+     file.save(file_path)
+
+     #img_path = 'C:\\Users\\Prakash\\Desktop\\internship\\Waste_Segregation\\plastic1.jpg'
+     img = image.load_img(file_path, target_size=(32,32))
      img = image.img_to_array(img, dtype=np.uint8)
      img = np.array(img)/255.0
      model = tf.keras.models.load_model("model1.h5")
@@ -35,27 +52,7 @@ def predict(img_path):
      print("prob",prob)
      predicted_class = labels[np.argmax(predicted[0], axis=-1)]
      print("classified label:",predicted_class)
-     result=''
-     if predicted_class in ['Cardboard','Paper']:
-          category = "Biodegradable"
-          predicted_class = str(predicted_class)
-          probability = str(prob)
-          return category, predicted_class,probability
-          
-     elif predicted_class in ['Metal','Glass','Plastic']:
-          category = "Non-Biodegradable"
-          predicted_class = str(predicted_class)
-          probability = str(prob)
-          return category,predicted_class,probability
-        
-     else:
-          category = "Categorizing Difficult"
-          predicted_class = str(predicted_class)
-          probability = str(prob)
-          return category, predicted_class, probability
-          #result = predicted_class + '\n' + str(pro)
-     #return(result)
-#category,predicted_class,probability = predict(Image_path)
+     return jsonify({'prediction': predicted_class, 'probability': f'{prob}%'})
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
