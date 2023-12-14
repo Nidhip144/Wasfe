@@ -32,7 +32,7 @@ document.getElementById('file-input').addEventListener('change', function (event
                 // Display the prediction result
                 const predictionResult = document.createElement('p');
                 predictionResult.innerText = `Prediction: ${data.prediction}, Probability: ${data.probability}`;
-                document.getElementById('result-container').appendChild(predictionResult);
+                document.getElementById('result-container').alert(predictionResult);
             })
             .catch(error => {
                 console.error('Error during prediction:', error);
