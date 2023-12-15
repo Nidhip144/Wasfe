@@ -16,8 +16,8 @@ document.getElementById('file-input').addEventListener('change', function (event
             imgElement.src = imageUrl;
             imgElement.style.maxWidth = '300px'; // Adjust the max width as needed
             imgElement.style.maxHeight = '300px'; // Adjust the max height as needed
-            document.getElementById('result-container').innerHTML = '';
-            document.getElementById('result-container').appendChild(imgElement);
+            document.getElementById('preview-container').innerHTML = '';
+            document.getElementById('preview-container').appendChild(imgElement);
 
             // Use FormData to send the file to the server
             const formData = new FormData();
@@ -31,8 +31,13 @@ document.getElementById('file-input').addEventListener('change', function (event
             .then(data => {
                 // Display the prediction result
                 const predictionResult = document.createElement('p');
-                predictionResult.innerText = `Prediction: ${data.prediction}, Probability: ${data.probability}`;
+                predictionResult.innerText = `Prediction: ${data.prediction}
+                 Probability: ${data.probability}`;
+                document.getElementById('result-container').classList.add('result-box');
+                // document.getElementById('result-container').innerText=`       RESULT: 
+                                    // `;
                 document.getElementById('result-container').appendChild(predictionResult);
+                
             })
             .catch(error => {
                 console.error('Error during prediction:', error);

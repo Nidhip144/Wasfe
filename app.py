@@ -51,8 +51,8 @@ def predict():
      print("p.shape:",predicted.shape)
      print("prob",prob)
      predicted_class = labels[np.argmax(predicted[0], axis=-1)]
-     print("classified label:",predicted_class)
-     return jsonify({'prediction': predicted_class, 'probability': f'{prob}%'})
+     print("Classified label:",predicted_class)
+     return jsonify({'prediction': predicted_class, 'probability': f'{prob}'})
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

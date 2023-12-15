@@ -1,9 +1,15 @@
+@keyframes pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
 body {
     background-color: #212121;
     color: white
 }
 
 .container2 {
+    max-width: 70%;
     background-color: #222535;
     border: 1px solid #ccc;
     padding: 20px;
@@ -14,7 +20,11 @@ body {
 
 #upload-btn {
     background-color: #30343f;
-    border-color: aliceblue;
+  border-radius: 4px;
+  border: 1px solid rgb(113, 169, 219);
+  margin-bottom: 2%;
+  padding: 3px;
+  
 }
 
 .heading {
@@ -23,22 +33,37 @@ body {
     margin-top: 3%;
 }
 
-#result {
-    margin-top: 15px;
-    background-color: #161a30;
-    /* padding: 5px; */
-    border: 1px solid #bce8f1;
-    border-radius: 5px;
-    font-size: xx-large;
-    border-color: #c5c7d2;
-
-    transition: opacity 30s;    
-}
-
 #result-container img {
     display: block;
-    margin: 0 auto;
+    margin: 15px;
     max-width: 100%;
+    border-radius: 4px;
+    border: 2px rgb(113, 169, 219);
+    align-self: center;
+    margin-bottom: 10px;
+}
+/* .result-before{
+    content: "RESULT\n";
+    text-align: center;
+    padding: 5px;
+    font-family: inherit;
+    font-size: medium;
+    font-weight: 300;
+} */
+
+.result-box{
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+    font: medium white ;
+    font-family: inherit;
+    border: rgb(98, 135, 221) 1px;
+    border-radius: 4px;
+    background-color: #44d147;
+    padding: 10px;
+    margin-top: 2% ; 
+    animation: pop 0.6s ease-out;
+    font-weight: 400;
 }
 
 .btn-lg,
@@ -50,3 +75,9 @@ body {
     font-size: x-large;
     line-height: 25px;
 }
+
+/* .result-box{
+    border: 1px solid #644040;
+            padding: 10px;
+            margin-top: 20px;
+} */
