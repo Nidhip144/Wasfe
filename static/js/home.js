@@ -16,8 +16,8 @@ document.getElementById('file-input').addEventListener('change', function (event
             imgElement.src = imageUrl;
             imgElement.style.maxWidth = '300px'; // Adjust the max width as needed
             imgElement.style.maxHeight = '300px'; // Adjust the max height as needed
-            imgElement.style.border='2px solid white';
-            imgElement.style.borderRadius='3px'
+            imgElement.style.border = '2px solid white';
+            imgElement.style.borderRadius = '3px';
             document.getElementById('preview-container').innerHTML = '';
             document.getElementById('preview-container').appendChild(imgElement);
 
@@ -29,21 +29,21 @@ document.getElementById('file-input').addEventListener('change', function (event
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                // Display the prediction result
-                const predictionResult = document.createElement('p');
-                predictionResult.innerText = `Prediction: ${data.prediction}
-                 Probability: ${data.probability}`;
-                document.getElementById('result-container').classList.add('result-box');
-                // document.getElementById('result-container').innerText=`       RESULT: 
-                                    // `;
-                document.getElementById('result-container').appendChild(predictionResult);
-                
-            })
-            .catch(error => {
-                console.error('Error during prediction:', error);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    // Clear the old result before displaying the new one
+                    document.getElementById('result-container').innerHTML = '';
+
+                    // Display the prediction result
+                    const predictionResult = document.createElement('p');
+                    predictionResult.innerText = `Prediction: ${data.prediction} Probability: ${data.probability}`;
+                    document.getElementById('result-container').classList.add('result-box');
+                    document.getElementById('result-container').appendChild(predictionResult);
+
+                })
+                .catch(error => {
+                    console.error('Error during prediction:', error);
+                });
         };
 
         reader.readAsDataURL(file);
