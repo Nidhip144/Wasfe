@@ -21,6 +21,42 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 
+# def detect_and_visualize(img, model_path, class_mapping, confidence_threshold=0.25):
+#     model = YOLO(model_path)
+#     results = model.predict(source=img, conf=confidence_threshold)
+#     float_detections = results[0].boxes.xyxy.tolist()
+#     detections = [[int(value) for value in detection] for detection in float_detections]
+#     confidences = results[0].boxes.conf.tolist()
+
+#     total_trees = 0
+#     resized_img = cv2.resize(img, (600, 600))
+
+#     scaling_factor_x = 600 / img.shape[1]
+#     scaling_factor_y = 600 / img.shape[0]
+
+#     for i in range(len(detections)):
+#         box = detections[i]
+#         resized_box = [
+#             int(box[0] * scaling_factor_x),
+#             int(box[1] * scaling_factor_y),
+#             int(box[2] * scaling_factor_x),
+#             int(box[3] * scaling_factor_y)
+#         ]
+#         class_index = int(results[0].boxes.cls[i])
+#         conf = confidences[i]
+
+#         if conf > 0.05 and class_index in class_mapping:
+#             total_trees += 1
+
+#             class_label = class_mapping[class_index]['label']
+
+#             cv2.putText(resized_img, f'{class_label} {conf:.3f}', (resized_box[0], resized_box[1]), cv2.FONT_HERSHEY_PLAIN, 1, (255, 0, 0), 2)
+#             cv2.rectangle(resized_img, (resized_box[0], resized_box[1]), (resized_box[2], resized_box[3]), (255, 0, 255), 2)
+
+#     _, result_image = cv2.imencode('.jpg', resized_img)
+#     result_bytes = result_image.tobytes()
+    
+
 def predict():
      labels={0: 'Cardboard', 1: 'Glass', 2: 'Metal', 3: 'Paper', 4: 'Plastic', 5: 'Trash'}
 
