@@ -9,7 +9,7 @@ from PIL import Image
 
 
 labels={0: 'Cardboard', 1: 'Glass', 2: 'Metal', 3: 'Paper', 4: 'Plastic', 5: 'Trash'}
-img_path = 'plastic1.jpg'
+img_path = 'C:\\Users\\Prakash\\Desktop\\internship\\Waste_Segregation\\plastic1.jpg'
 img = image.load_img(img_path, target_size=(32,32))
 img = image.img_to_array(img, dtype=np.uint8)
 img = np.array(img)/255.0

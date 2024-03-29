@@ -16,6 +16,8 @@ document.getElementById('file-input').addEventListener('change', function (event
             imgElement.src = imageUrl;
             imgElement.style.maxWidth = '300px'; // Adjust the max width as needed
             imgElement.style.maxHeight = '300px'; // Adjust the max height as needed
+            imgElement.style.border='2px solid white';
+            imgElement.style.borderRadius='3px'
             document.getElementById('preview-container').innerHTML = '';
             document.getElementById('preview-container').appendChild(imgElement);
 
@@ -49,23 +51,3 @@ document.getElementById('file-input').addEventListener('change', function (event
         alert('Please select a valid image file.');
     }
 });
-
-// async function prediction(){
-//     let response = await fetch("/predict").then((response)=>response.json())
-//     // console.log(response['otp'])
-
-//     const para = document.createElement("p")
-//     para.id = "result"
-//     para.innerHTML = response['predicted_class']
-
-//     // document.getElementById("result-container").innerHTML = `<p id="result" >${response['otp']}</p>`
-//     document.getElementById("result-container").appendChild(para)
-
-
-//     setTimeout(() => {
-//         para.style.opacity = '0';
-//     }, 20000);
-//     errorBox.addEventListener('transitionend', () => errorBox.remove());
-
-
-// }
