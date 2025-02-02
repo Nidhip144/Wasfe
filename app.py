@@ -14,7 +14,7 @@ app = Flask(__name__,template_folder='template')
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+#routes
 @app.route('/')
 def index():
     return render_template('index.html')
